@@ -606,3 +606,15 @@ html.lenis,html.lenis body{height:auto}
 @keyframes cue-wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:0}}
 @keyframes cue-swipe{0%{transform:translateY(0);opacity:1}70%{transform:translateY(-22px);opacity:0}100%{transform:translateY(0);opacity:0}}
 @media (prefers-reduced-motion:reduce){#cue-scroll,#cue-scroll .cm i,#cue-scroll .cs i{animation:none!important;transition:none!important}}
+#cue-ptr .cue-c{position:absolute;left:0;top:0;width:0;height:0;will-change:transform}
+#cue-ptr .cue-arw{position:absolute;left:0;top:0;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.55));transition:transform .2s ease}
+#cue-ptr .cue-c.hov .cue-arw{transform:scale(.88)}
+#cue-ptr .cue-c.tap .cue-arw{animation:cue-tap .25s ease}
+#cue-ptr .cue-dot{position:absolute;left:-11px;top:-11px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.5)}
+#cue-ptr .cue-c.tap .cue-dot{animation:cue-tap .25s ease}
+#cue-ptr .cue-rip{position:absolute;left:-18px;top:-18px;width:36px;height:36px;border-radius:50%;border:2px solid var(--hi);opacity:0;transform:scale(.3)}
+#cue-ptr .cue-rip.go{animation:cue-rip .5s ease-out forwards}
+@keyframes cue-tap{50%{transform:scale(.8)}}
+@keyframes cue-rip{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
+.cue-ring{outline:2px solid var(--hi);outline-offset:4px}
+@media (prefers-reduced-motion:reduce){#cue-ptr *{animation:none!important;transition:none!important}}
