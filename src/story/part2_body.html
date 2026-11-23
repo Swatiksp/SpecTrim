@@ -1,0 +1,601 @@
+<style>
+.bubble{width:auto;max-width:100%;text-align:center}
+svg text{fill:var(--ink)}
+.node.dsh rect{stroke-dasharray:4 3}
+.node.hi rect{fill:var(--hi)!important}
+.node.hi text{fill:var(--hiInk)!important}
+.rg{fill:none;stroke:var(--line2);stroke-dasharray:3 4}
+.rgl{font:500 9px var(--mono);fill:var(--ink3)!important;paint-order:stroke;stroke:var(--fill);stroke-width:3}
+.ph .q{fill:transparent;stroke:none;transition:fill .2s}
+.ph:hover .q,.ph.sel .q{fill:var(--fill2)}
+.scrollx{overflow-x:auto}
+.scrollx>svg{min-width:640px}
+.pillsvg rect{fill:var(--hi)}
+.pillsvg text{fill:var(--hiInk)!important}
+.tl-li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;font:400 12px/1.4 var(--mono);padding:5px 0;border-bottom:1px dashed var(--line2);animation:fin .4s ease both}
+.tl-li b{font-weight:500;color:var(--ink2)}
+#tlist{list-style:none;margin:0;padding:0;min-height:20px}
+.tl-li em{font-style:normal;background:var(--hi);color:var(--hiInk);padding:0 3px;border-radius:2px}
+.row:focus-visible,.tile:focus-visible,.idea:focus-visible,.btn:focus-visible,.tabs button:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+.mini-cap{font:400 12px var(--mono);color:var(--ink2);min-height:18px;margin:6px 0 0}
+.hl-t{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.lcrow{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+</style>
+<div id="bar"></div>
+<header id="hud">
+  <div class="brand"><i></i>SpecTrim</div>
+  <div class="count"><span id="cnt"></span><button class="btn hb" id="prb" aria-haspopup="dialog">Presenter</button><button class="btn hb" id="fbb" aria-haspopup="dialog">Feedback</button><button class="btn" id="rfb" aria-label="Refresh and start over" title="Refresh and start over" style="padding:3px 9px">↻</button><button class="btn" id="thm" aria-label="Toggle light or dark" style="padding:3px 9px">◐</button></div>
+</header>
+<nav id="dots" aria-label="Beats"></nav>
+<div id="hint"><kbd>↑</kbd><kbd>↓</kbd> beats <kbd>←</kbd><kbd>→</kbd> steps</div>
+
+<main>
+<!-- ============ COVER ============ -->
+<section class="beat active" id="b0" data-t="Start">
+  <div class="kick rv"><span>GD 503 · MGXD · NC State</span></div>
+  <h1 class="rv" style="--i:1">SpecTrim</h1>
+  
+    <div class="rv" style="--i:4"><button class="btn sol" data-go="1" data-dir="down">Start</button></div>
+  <div class="cover-art" aria-hidden="true">
+    <svg viewBox="0 0 400 400">
+      <line x1="200.0" y1="76.8" x2="200.0" y2="-8.6" stroke="var(--line)" stroke-width="1" opacity=".55"/>
+      <line x1="317.2" y1="161.9" x2="398.4" y2="135.6" stroke="var(--line)" stroke-width="1" opacity=".55"/>
+      <line x1="272.4" y1="299.7" x2="322.6" y2="368.7" stroke="var(--line)" stroke-width="1" opacity=".55"/>
+      <line x1="127.6" y1="299.7" x2="77.4" y2="368.7" stroke="var(--line)" stroke-width="1" opacity=".55"/>
+      <line x1="82.8" y1="161.9" x2="1.6" y2="135.6" stroke="var(--line)" stroke-width="1" opacity=".55"/>
+      <g class="dd" style="--dx:4px;--dy:-5px;animation-delay:-0s">
+        <circle cx="253.9" cy="102.6" r="1.8" fill="#9AA6FF" opacity="0.59"/>
+        <circle cx="261.1" cy="97.6" r="1" fill="#C9CDD4" opacity="0.98"/>
+        <circle cx="292.8" cy="105.6" r="2.4" fill="#9096A0" opacity="0.94"/>
+        <circle cx="250.2" cy="77.1" r="3" fill="#C9CDD4" opacity="0.63"/>
+        <circle cx="286.9" cy="98.7" r="1.2" fill="#C9CDD4" opacity="0.77"/>
+        <circle cx="280.2" cy="96.0" r="3" fill="#FF7A6B" opacity="0.66"/>
+        <circle cx="233.3" cy="66.9" r="2" fill="#C9CDD4" opacity="0.68"/>
+        <circle cx="331.8" cy="150.5" r="2" fill="#9096A0" opacity="0.74"/>
+        <circle cx="329.0" cy="148.3" r="1.6" fill="#C9CDD4" opacity="0.82"/>
+        <circle cx="290.1" cy="92.2" r="3" fill="#6B717B" opacity="0.85"/>
+        <circle cx="218.5" cy="57.8" r="2" fill="#C9CDD4" opacity="0.95"/>
+        <circle cx="258.4" cy="81.1" r="3.8" fill="#9AA6FF" opacity="0.58" style="filter:drop-shadow(0 0 4px #9AA6FF)"/>
+        <circle cx="307.6" cy="121.0" r="2" fill="#9096A0" opacity="0.73"/>
+        <circle cx="242.0" cy="87.6" r="3.8" fill="#4457F0" opacity="0.99" style="filter:drop-shadow(0 0 4px #4457F0)"/>
+        <circle cx="302.2" cy="110.7" r="2" fill="#9096A0" opacity="0.92"/>
+        <circle cx="233.2" cy="70.9" r="3" fill="#4457F0" opacity="0.98"/>
+        <circle cx="306.1" cy="103.6" r="3.8" fill="#4457F0" opacity="0.73" style="filter:drop-shadow(0 0 4px #4457F0)"/>
+        <circle cx="226.1" cy="57.4" r="2" fill="#9096A0" opacity="0.62"/>
+        <circle cx="254.9" cy="82.7" r="1" fill="#C9CDD4" opacity="0.58"/>
+        <circle cx="233.8" cy="75.0" r="1.6" fill="#C9CDD4" opacity="0.76"/>
+        <circle cx="241.7" cy="39.1" r="3" fill="#9096A0" opacity="0.70"/>
+        <circle cx="245.6" cy="74.5" r="2.4" fill="#9096A0" opacity="0.71"/>
+        <circle cx="289.3" cy="123.5" r="1.6" fill="#C9CDD4" opacity="0.78"/>
+        <circle cx="318.3" cy="145.4" r="2.4" fill="#4457F0" opacity="0.83"/>
+        <circle cx="309.7" cy="123.5" r="2.4" fill="#9096A0" opacity="0.77"/>
+        <circle cx="303.4" cy="124.8" r="2.4" fill="#FF7A6B" opacity="0.86"/>
+        <circle cx="346.4" cy="128.5" r="1.2" fill="#9096A0" opacity="0.60"/>
+        <circle cx="270.8" cy="94.9" r="3.8" fill="#9AA6FF" opacity="0.96" style="filter:drop-shadow(0 0 4px #9AA6FF)"/>
+        <circle cx="258.0" cy="75.5" r="1.2" fill="#6B717B" opacity="0.75"/>
+        <circle cx="293.9" cy="117.1" r="3.8" fill="#FF7A6B" opacity="0.88" style="filter:drop-shadow(0 0 4px #FF7A6B)"/>
+        <circle cx="220.3" cy="74.3" r="3.8" fill="#FF7A6B" opacity="0.85" style="filter:drop-shadow(0 0 4px #FF7A6B)"/>
+        <circle cx="253.8" cy="84.1" r="3" fill="#C9CDD4" opacity="0.60"/>
+        <circle cx="302.3" cy="134.9" r="1.2" fill="#6B717B" opacity="0.68"/>
+        <circle cx="230.6" cy="85.7" r="1.8" fill="#FF7A6B" opacity="0.96"/>
+        <circle cx="264.3" cy="76.0" r="2.4" fill="#9AA6FF" opacity="0.79"/>
+        <circle cx="216.0" cy="48.7" r="1.2" fill="#9096A0" opacity="0.61"/>
+        <circle cx="289.4" cy="108.1" r="1.8" fill="#FF7A6B" opacity="0.66"/>
+        <circle cx="253.3" cy="65.0" r="1.8" fill="#9AA6FF" opacity="0.75"/>
+        <circle cx="295.6" cy="97.2" r="2.4" fill="#4457F0" opacity="0.86"/>
+        <circle cx="329.9" cy="123.0" r="3.8" fill="#9AA6FF" opacity="0.61" style="filter:drop-shadow(0 0 4px #9AA6FF)"/>
+        <circle cx="229.6" cy="59.3" r="1.2" fill="#9096A0" opacity="0.97"/>
+        <circle cx="289.9" cy="114.0" r="1.2" fill="#6B717B" opacity="0.89"/>
+        <circle cx="220.6" cy="61.7" r="3" fill="#FF7A6B" opacity="0.74"/>
+        <circle cx="262.3" cy="80.2" r="2" fill="#C9CDD4" opacity="0.75"/>
+        <circle cx="221.0" cy="46.5" r="1" fill="#9096A0" opacity="0.67"/>
+        <circle cx="217.5" cy="52.2" r="3" fill="#6B717B" opacity="0.92"/>
+      </g>
+      <g class="dd" style="--dx:4px;--dy:5px;animation-delay:-1s">
+        <circle cx="327.2" cy="184.0" r="1.2" fill="#C9CDD4" opacity="0.74"/>
+        <circle cx="349.0" cy="175.9" r="2.4" fill="#FF7A6B" opacity="0.58"/>
+        <circle cx="312.2" cy="290.4" r="1.8" fill="#FF7A6B" opacity="0.79"/>
+        <circle cx="341.7" cy="203.7" r="1.2" fill="#9096A0" opacity="0.97"/>
+        <circle cx="320.7" cy="256.9" r="1.8" fill="#FF7A6B" opacity="1.00"/>
+        <circle cx="342.6" cy="169.7" r="2" fill="#C9CDD4" opacity="0.66"/>
+        <circle cx="327.8" cy="232.1" r="2.4" fill="#FF7A6B" opacity="0.99"/>
+        <circle cx="340.0" cy="215.7" r="1.6" fill="#6B717B" opacity="0.99"/>
+        <circle cx="293.7" cy="287.6" r="3" fill="#9096A0" opacity="0.93"/>
+        <circle cx="309.0" cy="294.7" r="1.6" fill="#C9CDD4" opacity="0.57"/>
+        <circle cx="337.0" cy="191.4" r="1.2" fill="#6B717B" opacity="0.57"/>
+        <circle cx="297.7" cy="295.9" r="1.8" fill="#FF7A6B" opacity="0.76"/>
+        <circle cx="321.2" cy="240.9" r="2" fill="#9096A0" opacity="0.81"/>
+        <circle cx="325.4" cy="227.1" r="2.4" fill="#C9CDD4" opacity="0.93"/>
+        <circle cx="323.7" cy="181.0" r="3" fill="#FF7A6B" opacity="0.88"/>
+        <circle cx="327.5" cy="264.7" r="2" fill="#C9CDD4" opacity="0.88"/>
+        <circle cx="302.2" cy="278.9" r="2.4" fill="#C9CDD4" opacity="0.91"/>
+        <circle cx="315.3" cy="270.0" r="1" fill="#9096A0" opacity="0.61"/>
+        <circle cx="318.3" cy="211.4" r="1.2" fill="#C9CDD4" opacity="0.77"/>
+        <circle cx="351.1" cy="163.2" r="1" fill="#C9CDD4" opacity="0.85"/>
+        <circle cx="341.1" cy="177.0" r="3" fill="#9096A0" opacity="0.84"/>
+        <circle cx="321.0" cy="231.8" r="2.4" fill="#FF7A6B" opacity="0.58"/>
+        <circle cx="343.0" cy="186.2" r="1" fill="#6B717B" opacity="0.77"/>
+        <circle cx="289.8" cy="307.2" r="3" fill="#FF7A6B" opacity="0.76"/>
+        <circle cx="313.5" cy="232.3" r="3" fill="#FF7A6B" opacity="0.76"/>
+        <circle cx="286.3" cy="279.1" r="2.4" fill="#FF7A6B" opacity="0.96"/>
+        <circle cx="298.0" cy="302.3" r="3" fill="#FF7A6B" opacity="0.95"/>
+        <circle cx="319.1" cy="277.1" r="1.8" fill="#FF7A6B" opacity="0.62"/>
+        <circle cx="301.2" cy="307.1" r="1.8" fill="#FF7A6B" opacity="0.93"/>
+        <circle cx="354.4" cy="163.6" r="3" fill="#9096A0" opacity="0.56"/>
+        <circle cx="311.0" cy="271.2" r="2" fill="#6B717B" opacity="0.89"/>
+        <circle cx="293.3" cy="289.3" r="2.4" fill="#FF7A6B" opacity="0.99"/>
+        <circle cx="334.5" cy="232.5" r="2" fill="#C9CDD4" opacity="0.96"/>
+        <circle cx="305.3" cy="306.5" r="2" fill="#C9CDD4" opacity="0.75"/>
+        <circle cx="312.1" cy="283.8" r="2" fill="#9096A0" opacity="0.74"/>
+        <circle cx="326.0" cy="209.3" r="2.4" fill="#FF7A6B" opacity="0.69"/>
+        <circle cx="323.8" cy="250.2" r="3.8" fill="#FF7A6B" opacity="0.96" style="filter:drop-shadow(0 0 4px #FF7A6B)"/>
+        <circle cx="291.4" cy="312.0" r="1" fill="#9096A0" opacity="0.63"/>
+        <circle cx="324.5" cy="249.5" r="2" fill="#C9CDD4" opacity="0.72"/>
+        <circle cx="315.6" cy="279.6" r="1.6" fill="#6B717B" opacity="0.81"/>
+        <circle cx="329.5" cy="221.3" r="1.2" fill="#6B717B" opacity="0.72"/>
+        <circle cx="328.7" cy="267.3" r="1" fill="#9096A0" opacity="0.74"/>
+        <circle cx="295.1" cy="275.2" r="2" fill="#6B717B" opacity="0.66"/>
+        <circle cx="341.9" cy="183.9" r="3" fill="#C9CDD4" opacity="0.84"/>
+        <circle cx="320.1" cy="286.4" r="1" fill="#C9CDD4" opacity="0.84"/>
+        <circle cx="328.7" cy="210.6" r="1.8" fill="#FF7A6B" opacity="0.58"/>
+      </g>
+      <g class="dd" style="--dx:6px;--dy:7px;animation-delay:-2s">
+        <circle cx="252.5" cy="332.0" r="3" fill="#4457F0" opacity="0.84"/>
+        <circle cx="138.3" cy="328.0" r="2" fill="#9096A0" opacity="0.87"/>
+        <circle cx="230.5" cy="316.2" r="3" fill="#9096A0" opacity="0.74"/>
+        <circle cx="216.4" cy="336.4" r="3.8" fill="#4457F0" opacity="0.64" style="filter:drop-shadow(0 0 4px #4457F0)"/>
+        <circle cx="150.7" cy="330.4" r="1.2" fill="#9096A0" opacity="0.76"/>
+        <circle cx="237.6" cy="304.2" r="2.4" fill="#6B717B" opacity="0.63"/>
+        <circle cx="245.0" cy="340.7" r="2.4" fill="#9AA6FF" opacity="0.56"/>
+        <circle cx="181.6" cy="331.4" r="2" fill="#6B717B" opacity="0.95"/>
+        <circle cx="131.5" cy="333.2" r="2.4" fill="#C9CDD4" opacity="0.89"/>
+        <circle cx="271.8" cy="329.1" r="2" fill="#6B717B" opacity="0.63"/>
+        <circle cx="279.8" cy="330.6" r="1.6" fill="#6B717B" opacity="0.90"/>
+        <circle cx="230.2" cy="328.1" r="3" fill="#9AA6FF" opacity="0.79"/>
+        <circle cx="212.0" cy="330.9" r="2" fill="#C9CDD4" opacity="0.57"/>
+        <circle cx="277.8" cy="328.0" r="3" fill="#9096A0" opacity="0.58"/>
+        <circle cx="185.2" cy="333.8" r="1.6" fill="#6B717B" opacity="0.55"/>
+        <circle cx="163.2" cy="326.8" r="1.2" fill="#9096A0" opacity="0.60"/>
+        <circle cx="167.3" cy="344.4" r="3.8" fill="#9AA6FF" opacity="0.63" style="filter:drop-shadow(0 0 4px #9AA6FF)"/>
+        <circle cx="152.5" cy="342.5" r="1.2" fill="#C9CDD4" opacity="0.70"/>
+        <circle cx="231.5" cy="339.4" r="2" fill="#9096A0" opacity="0.58"/>
+        <circle cx="270.6" cy="324.3" r="1.8" fill="#9AA6FF" opacity="0.67"/>
+        <circle cx="266.6" cy="318.5" r="2" fill="#9096A0" opacity="0.76"/>
+        <circle cx="139.2" cy="340.4" r="1.6" fill="#6B717B" opacity="0.68"/>
+        <circle cx="238.2" cy="326.5" r="1.6" fill="#9096A0" opacity="0.95"/>
+        <circle cx="186.6" cy="327.9" r="2.4" fill="#C9CDD4" opacity="0.65"/>
+        <circle cx="145.6" cy="345.9" r="1.6" fill="#6B717B" opacity="0.57"/>
+        <circle cx="233.4" cy="322.8" r="1" fill="#9096A0" opacity="0.72"/>
+        <circle cx="143.5" cy="335.5" r="2.4" fill="#C9CDD4" opacity="0.87"/>
+        <circle cx="225.7" cy="349.8" r="1.6" fill="#9096A0" opacity="0.57"/>
+        <circle cx="161.4" cy="314.7" r="2.4" fill="#9096A0" opacity="0.69"/>
+        <circle cx="247.2" cy="333.2" r="1" fill="#6B717B" opacity="0.91"/>
+        <circle cx="177.0" cy="320.1" r="1.6" fill="#6B717B" opacity="0.85"/>
+        <circle cx="216.7" cy="336.6" r="2" fill="#6B717B" opacity="0.56"/>
+        <circle cx="155.0" cy="321.7" r="1.2" fill="#6B717B" opacity="0.74"/>
+        <circle cx="145.7" cy="324.9" r="2.4" fill="#9AA6FF" opacity="0.56"/>
+        <circle cx="187.7" cy="343.3" r="2.4" fill="#C9CDD4" opacity="0.63"/>
+        <circle cx="224.5" cy="322.5" r="2" fill="#9096A0" opacity="0.77"/>
+        <circle cx="152.1" cy="326.2" r="1.8" fill="#4457F0" opacity="0.82"/>
+        <circle cx="182.1" cy="314.5" r="1.2" fill="#C9CDD4" opacity="0.83"/>
+        <circle cx="184.8" cy="323.8" r="2" fill="#9096A0" opacity="0.71"/>
+        <circle cx="259.2" cy="328.0" r="2.4" fill="#9096A0" opacity="0.93"/>
+        <circle cx="171.2" cy="329.6" r="2" fill="#C9CDD4" opacity="0.69"/>
+        <circle cx="237.3" cy="323.0" r="1.2" fill="#6B717B" opacity="0.56"/>
+        <circle cx="181.6" cy="334.8" r="3.8" fill="#9AA6FF" opacity="0.73" style="filter:drop-shadow(0 0 4px #9AA6FF)"/>
+        <circle cx="266.0" cy="345.3" r="1.8" fill="#9AA6FF" opacity="0.84"/>
+        <circle cx="260.9" cy="328.6" r="3" fill="#6B717B" opacity="0.98"/>
+        <circle cx="262.0" cy="321.5" r="1.2" fill="#9096A0" opacity="0.99"/>
+      </g>
+      <g class="dd" style="--dx:4px;--dy:5px;animation-delay:-3s">
+        <circle cx="60.1" cy="171.7" r="3" fill="#5CCB8A" opacity="0.62"/>
+        <circle cx="39.4" cy="191.4" r="3.8" fill="#5CCB8A" opacity="0.64" style="filter:drop-shadow(0 0 4px #5CCB8A)"/>
+        <circle cx="82.3" cy="278.7" r="3" fill="#5CCB8A" opacity="0.95"/>
+        <circle cx="95.9" cy="287.0" r="3" fill="#9096A0" opacity="0.94"/>
+        <circle cx="46.9" cy="171.6" r="3" fill="#C9CDD4" opacity="0.94"/>
+        <circle cx="48.4" cy="211.4" r="1.2" fill="#C9CDD4" opacity="0.71"/>
+        <circle cx="61.2" cy="201.8" r="1.6" fill="#6B717B" opacity="0.84"/>
+        <circle cx="49.2" cy="166.7" r="1" fill="#C9CDD4" opacity="0.89"/>
+        <circle cx="92.2" cy="279.7" r="3.8" fill="#5CCB8A" opacity="0.65" style="filter:drop-shadow(0 0 4px #5CCB8A)"/>
+        <circle cx="75.3" cy="215.5" r="1" fill="#6B717B" opacity="0.79"/>
+        <circle cx="71.7" cy="238.0" r="2.4" fill="#5CCB8A" opacity="0.56"/>
+        <circle cx="69.3" cy="190.1" r="3" fill="#5CCB8A" opacity="0.73"/>
+        <circle cx="102.3" cy="268.3" r="2.4" fill="#6B717B" opacity="0.97"/>
+        <circle cx="64.2" cy="211.2" r="1.8" fill="#5CCB8A" opacity="0.73"/>
+        <circle cx="106.5" cy="277.1" r="3.8" fill="#5CCB8A" opacity="0.64" style="filter:drop-shadow(0 0 4px #5CCB8A)"/>
+        <circle cx="70.5" cy="223.0" r="2.4" fill="#9096A0" opacity="0.69"/>
+        <circle cx="106.8" cy="264.4" r="3.8" fill="#5CCB8A" opacity="0.89" style="filter:drop-shadow(0 0 4px #5CCB8A)"/>
+        <circle cx="66.7" cy="246.2" r="3" fill="#5CCB8A" opacity="0.65"/>
+        <circle cx="96.9" cy="308.7" r="3.8" fill="#5CCB8A" opacity="0.86" style="filter:drop-shadow(0 0 4px #5CCB8A)"/>
+        <circle cx="44.8" cy="182.3" r="1.8" fill="#5CCB8A" opacity="0.63"/>
+        <circle cx="60.6" cy="181.4" r="3" fill="#5CCB8A" opacity="0.82"/>
+        <circle cx="103.6" cy="247.7" r="2" fill="#6B717B" opacity="0.93"/>
+        <circle cx="72.6" cy="207.8" r="2" fill="#9096A0" opacity="0.83"/>
+        <circle cx="89.0" cy="305.0" r="1.8" fill="#5CCB8A" opacity="0.83"/>
+        <circle cx="107.3" cy="286.7" r="1.8" fill="#5CCB8A" opacity="0.58"/>
+        <circle cx="72.0" cy="229.3" r="1" fill="#C9CDD4" opacity="0.95"/>
+        <circle cx="61.7" cy="202.2" r="1.8" fill="#5CCB8A" opacity="0.92"/>
+        <circle cx="77.6" cy="219.2" r="3" fill="#5CCB8A" opacity="0.69"/>
+        <circle cx="88.9" cy="247.9" r="2.4" fill="#6B717B" opacity="0.78"/>
+        <circle cx="74.3" cy="182.6" r="3.8" fill="#5CCB8A" opacity="0.78" style="filter:drop-shadow(0 0 4px #5CCB8A)"/>
+        <circle cx="95.3" cy="296.3" r="2.4" fill="#5CCB8A" opacity="0.75"/>
+        <circle cx="70.8" cy="241.8" r="3" fill="#5CCB8A" opacity="0.77"/>
+        <circle cx="78.9" cy="237.9" r="2.4" fill="#6B717B" opacity="0.97"/>
+        <circle cx="90.0" cy="275.3" r="1.8" fill="#5CCB8A" opacity="0.97"/>
+        <circle cx="39.8" cy="207.4" r="1" fill="#6B717B" opacity="0.73"/>
+        <circle cx="82.8" cy="255.0" r="2.4" fill="#5CCB8A" opacity="0.69"/>
+        <circle cx="76.4" cy="255.3" r="1.8" fill="#5CCB8A" opacity="0.71"/>
+        <circle cx="88.2" cy="269.6" r="1.6" fill="#C9CDD4" opacity="0.63"/>
+        <circle cx="79.8" cy="250.0" r="3" fill="#5CCB8A" opacity="0.69"/>
+        <circle cx="76.2" cy="205.9" r="3" fill="#5CCB8A" opacity="0.82"/>
+        <circle cx="93.8" cy="261.0" r="1.8" fill="#5CCB8A" opacity="0.64"/>
+        <circle cx="117.8" cy="286.1" r="1.6" fill="#6B717B" opacity="0.64"/>
+        <circle cx="77.4" cy="217.0" r="2.4" fill="#5CCB8A" opacity="0.78"/>
+        <circle cx="72.2" cy="219.7" r="2" fill="#C9CDD4" opacity="0.55"/>
+        <circle cx="95.8" cy="272.1" r="2.4" fill="#5CCB8A" opacity="0.84"/>
+        <circle cx="72.8" cy="251.7" r="2.4" fill="#5CCB8A" opacity="0.90"/>
+      </g>
+      <g class="dd" style="--dx:6px;--dy:7px;animation-delay:-4s">
+        <circle cx="143.8" cy="81.4" r="3" fill="#C9CDD4" opacity="0.85"/>
+        <circle cx="175.8" cy="63.8" r="2" fill="#6B717B" opacity="0.96"/>
+        <circle cx="76.9" cy="131.4" r="1.8" fill="#4457F0" opacity="0.93"/>
+        <circle cx="107.5" cy="85.8" r="1.6" fill="#C9CDD4" opacity="0.78"/>
+        <circle cx="116.4" cy="108.5" r="2.4" fill="#C9CDD4" opacity="0.71"/>
+        <circle cx="63.7" cy="133.1" r="2" fill="#9096A0" opacity="0.96"/>
+        <circle cx="135.0" cy="82.1" r="1.2" fill="#C9CDD4" opacity="1.00"/>
+        <circle cx="184.4" cy="58.6" r="1.2" fill="#C9CDD4" opacity="0.76"/>
+        <circle cx="141.1" cy="91.6" r="1.6" fill="#6B717B" opacity="0.89"/>
+        <circle cx="150.3" cy="88.4" r="3.8" fill="#4457F0" opacity="0.86" style="filter:drop-shadow(0 0 4px #4457F0)"/>
+        <circle cx="180.6" cy="50.2" r="3" fill="#9096A0" opacity="0.69"/>
+        <circle cx="110.2" cy="87.8" r="1.6" fill="#9096A0" opacity="0.93"/>
+        <circle cx="69.6" cy="144.9" r="2.4" fill="#C9CDD4" opacity="0.56"/>
+        <circle cx="63.8" cy="136.4" r="1" fill="#C9CDD4" opacity="0.81"/>
+        <circle cx="174.4" cy="67.6" r="1.2" fill="#C9CDD4" opacity="0.82"/>
+        <circle cx="146.1" cy="74.3" r="2.4" fill="#FF7A6B" opacity="0.77"/>
+        <circle cx="99.8" cy="134.6" r="2" fill="#6B717B" opacity="0.66"/>
+        <circle cx="76.2" cy="126.5" r="3" fill="#9096A0" opacity="0.77"/>
+        <circle cx="113.2" cy="87.5" r="2.4" fill="#C9CDD4" opacity="0.77"/>
+        <circle cx="97.1" cy="116.4" r="3" fill="#9096A0" opacity="0.71"/>
+        <circle cx="145.1" cy="84.6" r="2" fill="#C9CDD4" opacity="0.77"/>
+        <circle cx="159.4" cy="34.0" r="1.8" fill="#4457F0" opacity="0.94"/>
+        <circle cx="102.1" cy="100.3" r="2" fill="#6B717B" opacity="0.66"/>
+        <circle cx="64.2" cy="134.9" r="1.6" fill="#6B717B" opacity="0.78"/>
+        <circle cx="81.4" cy="95.3" r="1.6" fill="#9096A0" opacity="0.87"/>
+        <circle cx="71.2" cy="119.9" r="3" fill="#6B717B" opacity="0.80"/>
+        <circle cx="107.1" cy="99.2" r="3" fill="#C9CDD4" opacity="0.58"/>
+        <circle cx="123.7" cy="97.3" r="2.4" fill="#9AA6FF" opacity="0.57"/>
+        <circle cx="138.3" cy="78.6" r="3" fill="#9096A0" opacity="0.56"/>
+        <circle cx="164.1" cy="51.6" r="1.2" fill="#6B717B" opacity="0.74"/>
+        <circle cx="96.6" cy="104.5" r="1.8" fill="#FF7A6B" opacity="0.90"/>
+        <circle cx="113.3" cy="100.4" r="3" fill="#9096A0" opacity="0.72"/>
+        <circle cx="147.5" cy="104.5" r="3" fill="#9096A0" opacity="0.76"/>
+        <circle cx="173.8" cy="59.6" r="3" fill="#C9CDD4" opacity="0.60"/>
+        <circle cx="195.5" cy="66.6" r="3.8" fill="#FF7A6B" opacity="0.88" style="filter:drop-shadow(0 0 4px #FF7A6B)"/>
+        <circle cx="90.2" cy="127.6" r="3" fill="#9AA6FF" opacity="0.83"/>
+        <circle cx="140.8" cy="60.9" r="1" fill="#9096A0" opacity="0.56"/>
+        <circle cx="158.0" cy="100.6" r="3" fill="#6B717B" opacity="0.82"/>
+        <circle cx="183.4" cy="57.2" r="3" fill="#6B717B" opacity="0.62"/>
+        <circle cx="200.1" cy="74.2" r="3.8" fill="#4457F0" opacity="0.72" style="filter:drop-shadow(0 0 4px #4457F0)"/>
+        <circle cx="168.2" cy="80.4" r="3" fill="#C9CDD4" opacity="0.87"/>
+        <circle cx="162.7" cy="67.1" r="2.4" fill="#9096A0" opacity="0.92"/>
+        <circle cx="139.2" cy="92.4" r="3" fill="#4457F0" opacity="0.86"/>
+        <circle cx="105.5" cy="119.0" r="1.2" fill="#6B717B" opacity="0.92"/>
+        <circle cx="166.5" cy="60.4" r="2.4" fill="#6B717B" opacity="0.59"/>
+        <circle cx="124.4" cy="79.4" r="1.8" fill="#4457F0" opacity="0.85"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ 1 WHERE WE ARE ============ -->
+<section class="beat tall" id="b1" data-t="Where we are" data-m="0:40">
+  <div class="sc1" id="sc1"><div class="stk1"><div class="grid2 g48">
+    <div class="col">
+      <div class="kick"><b>01</b><span>Where we are</span></div>
+      <h2  style="--i:1">Building with AI sits on a spectrum. Here is where we are.</h2>
+      <p class="lede" style="--i:2">From context held in people’s heads to context written down for the machine.</p>
+    </div>
+    <div class="spx" id="spx" data-s="0">
+      <div class="spx-ax"><span>Context lives in people</span><span>Context is written down</span></div>
+      <div class="spx-tr" aria-hidden="true"><i class="ln"></i><div class="cell"><i class="n n1"></i></div><div class="cell"><i class="n n2"></i></div><div class="cell"><i class="n n3"></i></div><span class="you"><em>We are here</em><i></i></span></div>
+      <div class="spx-cs">
+        <div class="cell"><article class="spc" style="--k:0">
+          <header><b>Traditional</b><span>Meetings and tickets</span></header>
+          <div class="mn mt">
+            <div class="r"><i class="av e">E</i><span>Which auth library?</span><u>gap</u></div>
+            <div class="r"><i class="av p">P</i><span>Quick call?</span><s>30 min</s></div>
+            <div class="r"><i class="av t">T</i><span>What if no signal?</span><u>gap</u></div>
+          </div>
+          <p>Engineers fill the gaps with judgment and conversation.</p>
+        </article></div>
+        <div class="cell"><article class="spc" style="--k:1">
+          <header><b>Vibe coding</b><span>A chat that keeps going</span></header>
+          <div class="mn mv">
+            <div class="b u">Add sign-in to the app</div>
+            <div class="b a"><i class="ai"></i><span>Done. Added a Sign in screen.</span></div>
+            <div class="as"><u>assumed: session length</u><u>assumed: error state</u></div>
+          </div>
+          <p>Fast to prototype. Limits and context never get written down, so the AI assumes.</p>
+        </article></div>
+        <div class="cell"><article class="spc ok" style="--k:2">
+          <header><b>Spec-driven</b><span>The spec is the source</span></header>
+          <div class="mn ms">
+            <div class="r"><i></i><span>Goal</span></div>
+            <div class="r"><i></i><span>Limits and rules</span></div>
+            <div class="r"><i></i><span>Edge cases</span></div>
+            <div class="r"><i></i><span>Acceptance</span></div>
+            <div class="z"><b>0</b> gaps · <b>0</b> assumptions</div>
+          </div>
+          <p>The spec holds what the AI needs. No gaps, no room to assume.</p>
+        </article></div>
+      </div>
+      <p class="spx-q">But what counts as a spec? <b>Nobody has defined it.</b></p>
+    </div>
+  </div>
+</div></div></div>
+</section>
+
+<!-- ============ 2 THE CATCH ============ -->
+<section class="beat" id="b2" data-t="The catch" data-m="0:45">
+  <div class="grid2">
+    <div class="col">
+      <div class="kick rv"><b>02</b><span>The catch</span></div>
+      <h2 class="rv" style="--i:1">Everyone wants a single source of truth. Nobody has defined it.</h2>
+      <p class="lede rv" style="--i:2">What counts as a spec, who owns it and what it must hold is undefined. So meaning drifts down the chain, like Chinese whispers.</p>
+      <p class="cap rv" style="--i:3">Type your own sentence. Pass it on.</p>
+    </div>
+    <div class="tel rv" style="--i:3">
+      <div class="tel-top">
+      <div class="tel-in"><input id="tin" value="Add sign-in to the Repair Tracker app" maxlength="80" aria-label="Your sentence"><button class="btn sol" id="tgo" data-dir="down">Pass it on</button><button class="btn" id="trs">Reset</button></div>
+      <div class="whisper" id="wh"></div>
+      </div>
+      <div class="drift" id="drift" aria-live="polite"><span class="dl">Words kept from what you said</span><b id="dv">100%</b><i class="dbar"><u id="dbar"></u></i></div>
+      <div class="tel-out" id="tout" hidden>
+        <div class="box"><small>You said</small><span id="o1"></span></div>
+        <div class="box"><small>It came back</small><span id="o2"></span></div>
+      </div>
+      <p class="cap">Chinese whispers: each step passes on what it heard, not what you said. An illustration of drift, not real model output.</p>
+      <div id="tseen" hidden><p class="cap" style="margin:6px 0">Real life looked like this in the interviews. Tap one:</p><div class="chips" id="tseenc"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATEMENTS ============ -->
+<section class="beat tall stm" id="bS1" data-t="Not alone" data-m="0:20">
+  <div class="sc3" id="sc3" data-s="0">
+    <div class="stk3">
+      <h2 class="stm-h s3a"><span class="l1">Is this a problem you face yourself?</span> <b class="l2">You are not alone.</b></h2>
+      <h2 class="stm-h s3b">I interviewed <b>six engineers</b> and this is what they had to say.</h2>
+      <figure class="stm-q s3c"><blockquote>“I don’t think there’s ever going to be a day when specs are written 100% to the exact need.”</blockquote><figcaption><b>P5</b> · Director of Software Engineering<span>Six engineers, from a junior with 10 months of experience to a director.</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+<section class="beat stm" id="bS2" data-off data-t="What they said" data-m="0:10"></section>
+
+<!-- ============ 3 WHO I ASKED ============ -->
+<section class="beat" id="b3" data-off data-t="Who I asked">
+  <div class="grid2">
+    <div class="col">
+      <div class="kick rv"><b>03</b><span>Who I asked</span></div>
+      <h2 class="rv" style="--i:1">Six interviews, across the ladder.</h2>
+      <p class="lede rv" style="--i:2">Different positions, different levels of experience. <b>Senior software engineers use spec-driven development the most</b>, so they became who I designed for.</p>
+      <div class="rv" style="--i:3"><button class="btn" id="senbtn" aria-pressed="false">Who uses SDD the most?</button></div>
+      <div class="nums rv" style="--i:4"><div><b>6</b>interviews</div><div><b>30</b>cited excerpts</div><div><b>5</b>questionnaire versions</div></div>
+    </div>
+    <div class="col">
+      <div class="ladder rv" id="lad" style="--i:3">
+        <div class="rung" data-l="dir"><b>Director</b><div class="pp"><button data-p="5" aria-pressed="false">P5</button></div></div>
+        <div class="rung" data-l="pri"><b>Principal</b><div class="pp"><button data-p="3" aria-pressed="false">P3</button></div></div>
+        <div class="rung" data-l="sen"><b>Senior · Lead</b><div class="pp"><button data-p="1" aria-pressed="false">P1</button><button data-p="2" aria-pressed="false">P2</button><button data-p="6" aria-pressed="false">P6</button></div></div>
+        <div class="rung" data-l="jun"><b>Junior</b><div class="pp"><button data-p="4" aria-pressed="false">P4</button></div></div>
+      </div>
+      <div class="who rv" id="who" style="--i:4" aria-live="polite"><b>Tap a participant</b><span class="cap">Roles as listed in my research.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 THE MAPS ============ -->
+<section class="beat" id="b4" data-off data-t="The maps">
+  <div class="grid2">
+    <div class="col">
+      <div class="kick rv"><b>04</b><span>The maps</span></div>
+      <h2 class="rv" style="--i:1">Four maps. Two were built side by side.</h2>
+      <div class="tabs rv" role="tablist" id="t4" aria-label="Maps" style="--i:2">
+        <button role="tab" aria-selected="true">Stakeholder</button><button role="tab" aria-selected="false">Ecosystem</button><button role="tab" aria-selected="false" title="A map of one person’s steps, pains and emotions through a task.">Journey</button><button role="tab" aria-selected="false">Mind map</button>
+      </div>
+      <p class="lede rv" id="c4" style="--i:3"></p>
+      <div class="par rv" id="par4" style="--i:4" hidden><span>Journey map</span><span class="sw">⇄</span><span>Mind map</span><span class="bar"><i></i></span><span>built at the same time, data moving both ways</span></div>
+      <div class="rv" id="jx" hidden style="--i:5;display:grid;gap:6px"><div><button class="btn tgl" id="jtog" aria-pressed="false">With my ideas</button></div><p class="cap" id="jcap" style="margin:0">Today’s curve. Tap a pain to read the quotes behind it.</p></div>
+      <p class="cap rv" style="--i:5">Simplified versions of the real maps. Tap items, or use ← →. Bolder nodes carry interview evidence.</p>
+    </div>
+    <div class="stage rv" style="--i:3">
+      <button class="enl" id="enl">Enlarge ⤢</button>
+      <div class="mapwrap" id="mw4">
+        <div class="mp on scrollx" id="m-st"></div>
+        <div class="mp scrollx" id="m-ec"></div>
+        <div class="mp scrollx" id="m-jo"></div>
+        <div class="mp scrollx" id="m-mi"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 MAKING SENSE ============ -->
+<section class="beat tall" id="b5" data-t="Making sense of it" data-m="1:30">
+  <div class="sc5" id="sc5" data-s="0">
+    <div class="stk5">
+      <div class="pnl5">
+        <div class="pa" id="pa5">
+          <div class="kick"><b>05</b><span>Making sense of it</span></div>
+          <div class="nums stg" id="stg5" role="group" aria-label="Analysis stage"><button data-s="0" aria-pressed="false"><b>252</b>quotes</button><button data-s="1" aria-pressed="false"><b>62</b>codes</button><button data-s="2" aria-pressed="false"><b>15</b>themes</button><button data-s="3" aria-pressed="true"><b>4</b>meta-themes</button><button class="rp" id="rp5" aria-label="Replay the analysis">↻ replay</button></div>
+          <div class="info" id="tmInfo" aria-live="polite"></div>
+          <div class="chipsrow" id="pf5" role="group" aria-label="Show one participant"><span class="cap" style="margin:0">Show one person:</span><button data-p="1" aria-pressed="false">P1</button><button data-p="2" aria-pressed="false">P2</button><button data-p="3" aria-pressed="false">P3</button><button data-p="4" aria-pressed="false">P4</button><button data-p="5" aria-pressed="false">P5</button><button data-p="6" aria-pressed="false">P6</button></div>
+          <p class="cap">Hover or tap anything on the map to read it.</p>
+        </div>
+        <div class="pc" id="pc5">
+          <div class="kick"><span>The problem</span></div>
+          <h2>When a spec has gaps, the AI fills them with guesses nobody approved.</h2>
+          <p class="lede">So the question became: how might we surface those gaps before any code is generated?</p>
+        </div>
+        <div class="pb" id="pb5">
+          <div class="kick"><span>What it points at</span></div>
+          <h2>The evidence points at two ideas.</h2>
+          <button class="idea" id="iA5" aria-pressed="true">
+            <h3><span class="mk c"></span>Context Compiler</h3>
+            <span class="kw">Gaps · Context · Dependencies</span>
+            <p>Runs before code is generated. Gathers repo patterns, tech stack and dependencies, and flags gaps with a suggested line each.</p>
+            <span class="ev"><span class="tag sol">Strong</span><span class="tag">P1 P3 P4 P6</span><span class="tag gr">Context gaps: 6 of 6</span></span>
+          </button>
+          <button class="idea" id="iB5" aria-pressed="true">
+            <h3><span class="mk g"></span>Assumption log and gating</h3>
+            <span class="kw">Assumptions · Approval · Traceability</span>
+            <p>Record every AI assumption and force an explicit human gate before it ships.</p>
+            <span class="ev"><span class="tag sol">Strong</span><span class="tag">P2 P4 P5 P6</span><span class="tag gr">Intent and traceability: 5 of 6</span></span>
+          </button>
+          <p class="cap">Tap an idea to see which codes support it.</p>
+        </div>
+      </div>
+      <div class="tm"><button class="enl" id="tmEnl">Enlarge ⤢</button><svg id="tm5" viewBox="-310 -310 620 620" role="img" aria-label="Thematic map"></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 TWO STRONGEST ============ -->
+<section class="beat" id="b6" data-off data-t="Two strongest areas" data-m="0:40">
+  <div class="grid2" style="align-items:center">
+    <div class="col">
+      <div class="kick rv"><b>06</b><span>Two strongest areas</span></div>
+      <h2 class="rv" style="--i:1">The evidence points at two ideas.</h2>
+      <button class="idea rv" id="iA" aria-pressed="false" style="--i:2">
+        <h3><span class="mk c"></span>Context Compiler</h3>
+        <span class="kw">Gaps · Context · Dependencies</span>
+        <p>Runs before code is generated. Gathers repo patterns, tech stack and dependencies, and flags gaps with a suggested line each.</p>
+        <span class="ev"><span class="tag sol">Strong</span><span class="tag">P1 P3 P4 P6</span><span class="tag gr">Context gaps: 6 of 6</span></span>
+        <span class="sm" id="nA"></span>
+      </button>
+      <button class="idea rv" id="iB" aria-pressed="false" style="--i:3">
+        <h3><span class="mk g"></span>Assumption log and gating</h3>
+        <span class="kw">Assumptions · Approval · Traceability</span>
+        <p>Record every AI assumption and force an explicit human gate before it ships.</p>
+        <span class="ev"><span class="tag sol">Strong</span><span class="tag">P2 P4 P5 P6</span><span class="tag gr">Intent and traceability: 5 of 6</span></span>
+        <span class="sm" id="nB"></span>
+      </button>
+      <p class="cap rv" style="--i:4">Tap an idea to see which codes support it.</p>
+    </div>
+    <div class="col">
+      <div class="tm rv" style="--i:3"><button class="enl" id="tmEnl6">Enlarge ⤢</button><svg id="tm6" viewBox="-310 -310 620 620" role="img" aria-label="Thematic map with ideas highlighted"></svg></div>
+      <div class="conn" id="conn" hidden></div>
+      <p class="mini-cap" id="miniCap">Hover a dot for its code. Highlight counts are my judgement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANATOMY ============ -->
+<section class="beat" id="b11" data-t="The idea" data-m="0:45">
+  <div class="grid2 g48">
+    <div class="col">
+      <div class="kick rv"><b>07</b><span>The idea</span></div>
+      <h2 class="rv" style="--i:1">What if you could see your spec’s anatomy?</h2>
+      <p class="lede rv" style="--i:2" id="c11"></p>
+      <div class="tabs rv" role="tablist" id="t11" aria-label="Anatomy steps" style="--i:3"><button role="tab" aria-selected="true">The spec</button><button role="tab" aria-selected="false">Its parts</button><button role="tab" aria-selected="false">Its gaps</button></div>
+      <p class="cap rv" style="--i:4">An illustration. The real map is in the interface.</p>
+    </div>
+    <div class="an rv" id="an" data-s="0" style="--i:3">
+      <div class="an-spec"><div class="an-h"><b>Your spec</b><span>Repair Tracker sign-in</span></div><i></i><i></i><i class="s"></i><i></i><i class="s"></i><i></i></div>
+      <svg class="an-br" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0V5M10 5H90M10 5V12M30 5V12M50 5V12M70 5V12M90 5V12"/></svg>
+      <div class="an-parts">
+        <div class="an-p" style="--k:0"><h4>Scope</h4><ul><li>Sign-in screen</li><li>Supervisor access</li></ul></div>
+        <div class="an-p" style="--k:1"><h4>Requirements</h4><ul><li>Company auth library</li><li class="gap blk">Session length</li></ul></div>
+        <div class="an-p" style="--k:2"><h4>Edge cases</h4><ul><li>Expired session</li><li class="gap blk">No signal</li></ul></div>
+        <div class="an-p" style="--k:3"><h4>Acceptance</h4><ul><li>My Repairs in 10 s</li><li class="gap">Error wording</li></ul></div>
+        <div class="an-p" style="--k:4"><h4>Goals and context</h4><ul><li>app-mobile, api-core</li><li class="gap blk">Shared users table</li></ul></div>
+      </div>
+      <div class="an-sum"><span><b>5</b> parts</span><span><b>10</b> items</span><span class="g"><b>4</b> gaps</span><span class="g"><b>3</b> block export</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 LIFECYCLE ============ -->
+<section class="beat" id="b7" data-off data-t="Where the ideas live">
+  <div class="kick rv"><b>07</b><span>Where the ideas live</span></div>
+  <h2 class="rv" style="--i:1">The SDD lifecycle, before and after the ideas.</h2>
+  <div class="lcrow rv" style="--i:2">
+    <div class="hl-t"><div class="tabs" role="tablist" id="t7" aria-label="Lifecycle stage"><button role="tab" aria-selected="true">Today</button><button role="tab" aria-selected="false">+ Context Compiler</button><button role="tab" aria-selected="false">+ Assumption gating</button></div><button class="btn" id="play7">Play</button></div>
+    <div class="lc-wrap"><div class="lc" id="lc">
+      <div class="ln-n"><div class="lcb">Prompt Spec</div><div class="arrow"></div></div>
+      <div class="ln-n"><div class="lcb">Requirements</div><div class="arrow"></div></div>
+      <div class="ln-n"><div class="lcb dec">Happy?</div><div class="arrow"></div></div>
+      <div class="ins" data-s="1"><div class="lcb">Context Compiler<small>gathers context, flags gaps</small></div><div class="arrow"></div></div>
+      <div class="ins g" data-s="2"><div class="lcb">Approve Lines<small>blocking lines must be approved</small></div><div class="arrow"></div></div>
+      <div class="ln-n"><div class="lcb">Design</div><div class="arrow"></div></div>
+      <div class="ins g" data-s="2"><div class="lcb">Review Panel<small>context used + assumptions made</small></div><div class="arrow"></div></div>
+      <div class="ln-n"><div class="lcb dec">Happy?</div><div class="arrow"></div></div>
+      <div class="ln-n"><div class="lcb">Tasks</div><div class="arrow"></div></div>
+      <div class="ln-n"><div class="lcb">Implement</div><div class="arrow"></div></div>
+      <div class="ln-n"><div class="lcb">Verify</div><div class="arrow"></div></div>
+      <div class="ln-n"><div class="lcb up" id="upd">Update Spec<small id="updS" style="display:none">saves approved assumptions to spec and audit log</small></div></div>
+    </div></div>
+    <p class="loop">Happy? No → Edit → back to the step before.</p>
+    <p class="lede" id="c7" style="max-width:70ch"></p>
+    <div class="info" id="d7" hidden style="min-height:0;max-width:70ch" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ============ 8 PROBLEM TO SCREENS ============ -->
+<section class="beat" id="b8" data-off data-t="Problem to screens">
+  <div class="grid2">
+    <div class="col">
+      <div class="kick rv"><b>08</b><span>From problem to screens</span></div>
+      <h2 class="rv" style="--i:1">From the problem to the screens.</h2>
+      <div class="pipe rv" id="pp8" role="tablist" aria-label="Design steps" style="--i:2">
+        <div class="dash" style="padding:12px 6px 6px;display:flex;gap:6px;flex-wrap:wrap;position:relative"><span class="sm" style="position:absolute;top:-9px;left:8px;background:var(--bg);padding:0 4px">in parallel</span>
+          <button role="tab" aria-selected="true">Problem statements</button><button role="tab" aria-selected="false">How might we</button><button role="tab" aria-selected="false">User story</button></div>
+        <i>↓</i><div style="display:flex;gap:6px;align-items:center"><button role="tab" aria-selected="false">User flow</button><i>→</i><button role="tab" aria-selected="false">Visuals</button></div>
+      </div>
+      <p class="cap rv" style="--i:3">Tap a step, or use ← →</p>
+    </div>
+    <div class="stack rv" id="st8" style="--i:3"></div>
+  </div>
+</section>
+
+<!-- ============ 9 SPECTRIM ============ -->
+<section class="beat tall" id="b9" data-t="The interface" data-m="1:00">
+  <div class="kick rv"><b>09</b><span>The interface</span></div>
+  <h2 class="rv" style="--i:1">This is how I built the interface.</h2>
+  <div class="sc9" id="sc9">
+    <div class="stk">
+      <div class="cp9">
+        <div class="cptxt" id="cap9" aria-live="polite"><span class="cps" id="cps9"></span><h3 id="cpt9"></h3><p id="cpb9"></p></div>
+        <div class="steps" id="st9" role="group" aria-label="Interface steps"></div>
+      </div>
+      <div class="vp" id="vp9"><div id="ws9"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 VALIDATION ============ -->
+<section class="beat" id="b10" data-off data-t="How I validated it">
+  <div class="kick rv"><b>10</b><span>How I validated it</span></div>
+  <h2 class="rv" style="--i:1">Tested with people, in two rounds.</h2>
+  <div class="tests">
+    <div class="tcard rv" style="--i:2"><span class="tag">Test 1</span><h3>The spec map</h3><p>Two participants.</p><div class="ph2">Findings pending</div></div>
+    <div class="tcard rv" style="--i:3"><span class="tag">Test 2</span><h3>The redesign</h3><p>Three people: a professor as stakeholder with three tasks, then two classmates.</p><div class="ph2">Findings pending</div></div>
+    <div class="tcard real rv" style="--i:4"><span class="tag sol">Known so far</span><h3>Text was too small</h3><p>The professor flagged 10–13px text. The type scale is now 12 / 14 / 20 / 36.</p><button class="btn tgl" id="tsb" aria-pressed="false">Before → after</button><div class="tsx" id="tsx" aria-live="polite"></div></div>
+  </div>
+  <p class="cap rv" style="--i:5">[Placeholder: full findings come from my testing report.]</p>
+  <div class="rv" style="--i:6;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="font:600 clamp(20px,2.6vw,30px) var(--sans)">Feedback welcome.</span><button class="btn sol" id="fbb2">Leave feedback</button><button class="btn" data-go="0">Back to start</button></div>
+</section>
+
+<!-- ============ YOUR TURN ============ -->
+<section class="beat" id="b12" data-t="Let's test it out" data-m="4:00">
+  <div class="grid2 g48 t12">
+    <div class="col">
+      <div class="kick rv"><b>09</b><span>Let's test it out</span></div>
+      <h2 class="rv" style="--i:1">Let's test it out.</h2>
+      <p class="lede rv" style="--i:2">Choose a scenario. Two people per device. Think out loud. I will stay quiet and watch.</p>
+    </div>
+    <div class="scn-col rv" style="--i:3" id="scn" role="group" aria-label="Scenario"></div>
+  </div>
+</section>
+</main>
+<div id="ov" role="dialog" aria-modal="true" aria-label="Enlarged map"><button class="btn x" id="ovx">Close ✕</button><div class="in" id="ovin"></div></div>
