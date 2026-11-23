@@ -560,6 +560,9 @@ html.lenis,html.lenis body{height:auto}
 #b0 .btn:not(#rfb):not(.x):not(#evx):not(#fbx){--bh:58px;font-size:17px;padding-left:28px}
 #b2 .tel-in .btn:not(#rfb):not(.x):not(#evx):not(#fbx){--bh:52px}
 @media (prefers-reduced-motion:reduce){.btn::before,.btn::after{transition:none!important}}
+/* Reset uses Material Symbols restart_alt; drawn width matches the Pass it on arrow (52% box x 16.3/24 = 35.3%) */
+#trs.btn:not(#rfb):not(.x):not(#evx):not(#fbx){--a0:0deg;--a1:-360deg}
+#trs.btn:not(#rfb):not(.x):not(#evx):not(#fbx)::before{-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='160 -862 641 740'%3E%3Cpath d='M451-122q-123-10-207-101t-84-216q0-77 35.5-145T295-695l43 43q-56 33-87 90.5T220-439q0 100 66 173t165 84v60Zm60 0v-60q100-12 165-84.5T741-439q0-109-75.5-184.5T481-699h-20l60 60-43 43-133-133 133-133 43 43-60 60h20q134 0 227 93.5T801-439q0 125-83.5 216T511-122Z'/%3E%3C/svg%3E") center/35.3% auto no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='160 -862 641 740'%3E%3Cpath d='M451-122q-123-10-207-101t-84-216q0-77 35.5-145T295-695l43 43q-56 33-87 90.5T220-439q0 100 66 173t165 84v60Zm60 0v-60q100-12 165-84.5T741-439q0-109-75.5-184.5T481-699h-20l60 60-43 43-133-133 133-133 43 43-60 60h20q134 0 227 93.5T801-439q0 125-83.5 216T511-122Z'/%3E%3C/svg%3E") center/35.3% auto no-repeat}
 
 #b2 .tel-in{gap:16px}
 .yt-ctl{gap:16px}
