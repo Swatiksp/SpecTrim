@@ -589,3 +589,20 @@ html.lenis,html.lenis body{height:auto}
 .scn-go{display:flex}
 @media (prefers-reduced-motion:reduce){.scn-body,.scn-pad{transition:none!important}}
 .scn-item .scn .sdesc{max-width:none!important}.scn-item .scn{max-width:none!important;width:100%}
+
+/* cues */
+#cue-ptr{position:fixed;inset:0;z-index:50;pointer-events:none}
+#cue-scroll{position:fixed;left:50%;bottom:calc(56px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:49;pointer-events:none;opacity:0;transition:opacity .3s;width:22px;height:34px}
+#cue-scroll.on{opacity:.85}
+#cue-scroll .cm{position:absolute;inset:0;border:1.5px solid var(--ink2);border-radius:11px}
+#cue-scroll .cm i{position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--ink2)}
+#cue-scroll.on .cm i{animation:cue-wheel 1.4s ease-in-out infinite}
+#cue-scroll .cs{display:none}
+.cue-touch #cue-scroll .cm{display:none}
+.cue-touch #cue-scroll .cs{display:block;position:absolute;inset:0}
+.cue-touch #cue-scroll .cs:before{content:"";position:absolute;left:50%;top:4px;bottom:4px;width:2px;margin-left:-1px;border-radius:1px;background:linear-gradient(to top,var(--ink2),transparent);opacity:.6}
+.cue-touch #cue-scroll .cs i{position:absolute;left:50%;bottom:2px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--ink2)}
+.cue-touch #cue-scroll.on .cs i{animation:cue-swipe 1.4s ease-in-out infinite}
+@keyframes cue-wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:0}}
+@keyframes cue-swipe{0%{transform:translateY(0);opacity:1}70%{transform:translateY(-22px);opacity:0}100%{transform:translateY(0);opacity:0}}
+@media (prefers-reduced-motion:reduce){#cue-scroll,#cue-scroll .cm i,#cue-scroll .cs i{animation:none!important;transition:none!important}}

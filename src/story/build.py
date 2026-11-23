@@ -12,7 +12,7 @@ css=r('part4.css')+r('part5.css')+r('part6.css')
 j=r('part3.js').replace('__QDATA__',r('qdata.json').strip())
 assert j.rstrip().endswith('})();')
 j=j.rstrip()[:-5]            # the IIFE opened in part3 is closed after part7
-js=j+'\n'+r('part4.js')+'\n'+r('part5.js')+r('part6.js')+part7+'\n})();\n'
+js=j+'\n'+r('part4.js')+'\n'+r('part5.js')+r('part6.js')+'\n'+r('cues.js')+'\n'+part7+'\n})();\n'
 page=head+'\n<style>\n'+css+'\n</style>\n'+body+'\n<script>\n'+r('lenis.min.js')+'\n</script>\n<script>\n'+js+'</script>\n'
 # the page parts were written as an artifact (title and meta first, no <head>); turn that into a normal document
 page=page.replace('<title>SpecTrim Story</title>\n','',1).replace('<meta name="claude:viewport-fit-sides" content="cover">\n','',1)
