@@ -28,6 +28,8 @@ function onIdle(){
 function cancel(){
   hideScroll();end();arm()}
 CUE.cancel=cancel;window.CUE=CUE;
+/* a click or key inside the active section means the visitor already acted: its demo must not play (body-level paging does not count) */
+['pointerdown','keydown'].forEach(t=>window.addEventListener(t,e=>{const b=beats[cur];if(b&&e.target instanceof Node&&b.contains(e.target))CUE.done.add(b.id)},{capture:true,passive:true}));
 ['pointerdown','wheel','keydown','touchstart','scroll'].forEach(t=>window.addEventListener(t,cancel,{capture:true,passive:true}));
 window.addEventListener('pointermove',e=>{
   const far=lx===null||Math.hypot(e.clientX-lx,e.clientY-ly)>8;
